@@ -21,22 +21,70 @@ https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning
     ```
   
 # 2. 데이터 파일 업로드
+    'jedol-Fine-Turning-Sample.jsonl' 파일 폴더위치 확인, 아래는 data 폴더에 저장된 경우  
     ```
+    import requests
+    import os
     file_path = "data\jedol-Fine-Turning-Sample.jsonl"
     # 파일 보냄
     response = requests.post(
         "https://api.openai.com/v1/files",
-        headers={"Authorization": f"Bearer openai_api_key"},
+        headers={"Authorization":"Bearer openai_api_key"},
         files={'file': (os.path.basename(file_path), open(file_path, 'rb'))},
         data={"purpose": "fine-tune"}
     )
     # 응답 출력
     print(response.json())
     ```
-, Fine Tuning 모델 생성 
 
-# 3. 생성된 모델 테스트하기 
+# 모델 생성 요청 
 
-# 4. 제돌채 웹 페이지 만들기 
+    TRAINING_FILE_ID의 값은  데이터 파일 업로드에서 response.json() 값으로 넘어온 데이터 
+    ```
+    import requests, os, json
+    response = requests.post(
+        "https://api.openai.com/v1/fine_tuning/jobs",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer OPENAI_API_KEY "
+        },
+        data=json.dumps({
+            "training_file": "TRAINING_FILE_ID",
+            "model": "gpt-3.5-turbo-0613"
+        })
+    )
+    print(response.json())
+    ```
+
+# 4. 파인튜닝된 모델 테스트
+    ```
+    import requests
+    import json
+    import os
+    
+    response = requests.post(
+        "https://api.openai.com/v1/chat/completions",
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}"
+        },
+        data=json.dumps({
+            "model": "ft:gpt-3.5-turbo:org_id",
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "You are an assistant that occasionally misspells words"
+                },
+                {
+                    "role": "user",
+                    "content": "Hello! What is fine-tuning?"
+                }
+            ]
+        })
+    )
+    
+    print(response.json())
+    
+    ```
 
 
