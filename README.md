@@ -1,5 +1,6 @@
-# chatGPT 3.5 Turbo Fine Turning 간단한 예제 
-[ 2023-08-22 가능하게됨](https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning)
+# AI프로젝트 jedolChat 만들기 
+## chatGPT 3.5 Turbo Fine Turning 예제 
+[ 2023-08-22부터 파인튜닝이 가능하게됨](https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning)
 
 
 # 1. 파인튜닝 데이터 파일 만들기 
