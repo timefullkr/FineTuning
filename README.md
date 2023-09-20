@@ -4,12 +4,13 @@
 
 # 1. 파인튜닝 데이터 파일 만들기 
   - ### 파일명   :  jedol-Fine-Turning-Sample.jsonl
-  - ### 데이터 
-        예제에서 사용하는 학교 데이터는  홈페이지에 있는  학교연혁, 학사일정을 클로링한 데이터를 사용한다. 
-   ```
+  - ### 데이터
+      예제에서 사용하는 학교 데이터는  홈페이지에 있는  학교연혁, 학사일정을 클로링한 데이터를 사용한다.
+
+    ```
     {
       "messages": [
-        {"role": "system", "content": "나 제주과학고등학교 1학년이다. 이름은 제돌이미며  나이는 16세이다. 나는 학교에 대해 잘 알고 있는 모범생이다. 나 학교를 안내하는 역활이다" },
+        {"role": "system", "content": "나 제주과학고등학교 1학년이다. 이름은 제돌이미며  나이는 16세이다. 나는 학교에 대해 잘 알고 있는 모범생이다. 나 는 학교를 안내하는 역활이다" },
         {"role": "user", "content": "너 이름은" },
         {"role": "assistant", "content": "나의 이름은 제돌이" },
         {"role": "user","content": " 몇 살"},
@@ -22,70 +23,64 @@
     ```
   
 # 2. 데이터 파일 업로드
-    'jedol-Fine-Turning-Sample.jsonl' 파일 폴더위치 확인, 아래는 data 폴더에 저장된 경우  
-    ```
-    import requests
-    import os
-    file_path = "data\jedol-Fine-Turning-Sample.jsonl"
-    # 파일 보냄
-    response = requests.post(
-        "https://api.openai.com/v1/files",
-        headers={"Authorization":"Bearer openai_api_key"},
-        files={'file': (os.path.basename(file_path), open(file_path, 'rb'))},
-        data={"purpose": "fine-tune"}
-    )
-    # 응답 출력
-    print(response.json())
-    ```
+jedol-Fine-Turning-Sample.jsonl' 파일 폴더위치 확인, 아래는 data 폴더에 저장된 경우
+```
+import requests
+import os
+file_path = "data\jedol-Fine-Turning-Sample.jsonl"
 
-# 모델 생성 요청 
+response = requests.post(
+    "https://api.openai.com/v1/files",
+    headers={"Authorization":"Bearer openai_api_key"},
+    files={'file': (os.path.basename(file_path), open(file_path, 'rb'))},
+    data={"purpose": "fine-tune"}
+)
 
-    TRAINING_FILE_ID의 값은  데이터 파일 업로드에서 response.json() 값으로 넘어온 데이터 
-    ```
-    import requests, os, json
-    response = requests.post(
-        "https://api.openai.com/v1/fine_tuning/jobs",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer OPENAI_API_KEY "
-        },
-        data=json.dumps({
-            "training_file": "TRAINING_FILE_ID",
-            "model": "gpt-3.5-turbo-0613"
-        })
-    )
-    print(response.json())
-    ```
+print(response.json())
+```
+  
+
+# 3.모델 생성 요청 
+TRAINING_FILE_ID의 값은  데이터 파일 업로드에서 response.json() 값으로 넘어온 데이터
+```
+import requests, os, json
+response = requests.post(
+    "https://api.openai.com/v1/fine_tuning/jobs",
+    headers={
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer OPENAI_API_KEY "
+    },
+    data=json.dumps({
+        "training_file": "TRAINING_FILE_ID",
+        "model": "gpt-3.5-turbo-0613"
+    })
+)
+print(response.json())
+```
+파인튜닝이 정상적으로 종료되면 위의 모델 생성 요청 리턴 값 response.json() 와 메일로 **파인튜닝된 모델의 id**가 도착한다. 적게는 10분에서 몇 시간이 소요될 수 있다.
 
 # 4. 파인튜닝된 모델 테스트
-    ```
-    import requests
-    import json
-    import os
-    
-    response = requests.post(
-        "https://api.openai.com/v1/chat/completions",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}"
-        },
-        data=json.dumps({
-            "model": "ft:gpt-3.5-turbo:org_id",
-            "messages": [
-                {
-                    "role": "system",
-                    "content": "You are an assistant that occasionally misspells words"
-                },
-                {
-                    "role": "user",
-                    "content": "Hello! What is fine-tuning?"
-                }
-            ]
-        })
-    )
-    
-    print(response.json())
-    
-    ```
+```
+import requests
+import json
+import os
+response = requests.post(
+    "https://api.openai.com/v1/chat/completions",
+    headers={
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}"
+    },
+    data=json.dumps({
+        "model": "ft:gpt-3.5-turbo: 파인튜닝모델id ",
+        "messages": [
+            {
+                "role": "user",
+                "content": "너의 이름은 머니?"
+            }
+        ]
+    })
+)
+print(response.json())
+```
 
 
