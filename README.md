@@ -1,6 +1,7 @@
 # chatGPT 3.5 Turbo Fine Turning 간단한 예제 
-https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning
-2023-08-22 가능하게됨
+[ 2023-08-22 가능하게됨](https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning)
+
+
 # 1. 데이터 파일 만들기 
   - ### 파일명   :  jedol-Fine-Turning-Sample.jsonl
   - ### 데이이터 :  학교연혁, 학교 학사 일정
