@@ -1,4 +1,4 @@
-# jedolChat Fine Turning 간단한 예제 
+# chatGPT 3.5 Turbo Fine Turning 간단한 예제 
 https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning
 2023-08-22 가능하게됨
 # 1. 데이터 파일 만들기 
