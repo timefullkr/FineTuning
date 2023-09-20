@@ -6,6 +6,8 @@ https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning
   
 # 2. 데이터 파일 업로드, Fine Tuning 모델 생성 
 
-# 3. 생성된 모델 테스트하고 사용하기
+# 3. 생성된 모델 테스트하기 
+
+# 4. 제돌채 웹 페이지 만들기 
 
 
