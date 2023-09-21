@@ -1,9 +1,8 @@
 # AI프로젝트 jedolChat 만들기 2
-- ## chatGPT 3.5 Turbo Fine Turning 예제 
-   -  [Fine-tuning for GPT-3.5 Turbo Guide](https://platform.openai.com/docs/guides/legacy-fine-tuning/fine-tuning)
-   -  [Fine-tuning for GPT-3.5 Turbo Blog](https://openai.com/blog/gpt-3-5-turbo-fine-tuning-and-api-updates)
-
-
+- ## chatGPT 3.5 Turbo Fine Turning 예제
+   -   [Fine-tuning for GPT-3.5 Turbo Blog](https://openai.com/blog/gpt-3-5-turbo-fine-tuning-and-api-updates)
+   -   [Fine-tuning for GPT-3.5 Turbo docs/guides/fine-tuning](https://platform.openai.com/docs/guides/fine-tuning) 
+   
 # 1. 파인튜닝 데이터 파일 만들기 
   - ### 파일명   :  jedol-Fine-Turning-Sample.jsonl
   - ### 데이터
